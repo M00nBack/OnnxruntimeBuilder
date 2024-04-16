@@ -53,6 +53,7 @@ fi
 
 python3 $DIR/tools/ci_build/build.py --build_dir $DIR/build-$sysOS \
     --config Release \
+    --allow_running_as_root \
     --parallel \
     --skip_tests \
     --build_shared_lib \

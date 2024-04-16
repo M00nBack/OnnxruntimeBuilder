@@ -52,7 +52,6 @@ fi
 
 
 python3 $DIR/tools/ci_build/build.py --build_dir $DIR/build-$sysOS \
-    --allow_running_as_root \
     --config Release \
     --parallel \
     --skip_tests \

@@ -6,7 +6,7 @@ function collectLibs() {
   # shared lib
   cmake --build . --config Release --target install
 #  rm -r -f install/bin
-  mv install/include/onnxruntime/* install/include
+  mv install/include/onnxruntime/core/session/* install/include
   rm -rf install/include/onnxruntime
   echo "set(OnnxRuntime_INCLUDE_DIRS \"\${CMAKE_CURRENT_LIST_DIR}/include\")" > install/OnnxRuntimeConfig.cmake
   echo "include_directories(\${OnnxRuntime_INCLUDE_DIRS})" >> install/OnnxRuntimeConfig.cmake
@@ -53,12 +53,7 @@ function cmakeBuild() {
   cmake -DCMAKE_BUILD_TYPE=$1 \
     -DCMAKE_TOOLCHAIN_FILE=../musl-cross.toolchain.cmake \
     -DCMAKE_INSTALL_PREFIX=install \
-    -DCMAKE_C_FLAGS="-DNDEBUG -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fstack-protector-strong -O3 -pipe -fstack-clash-protection -fcf-protection" \
-    -DCMAKE_CXX_FLAGS="-DNDEBUG -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fstack-protector-strong -O3 -pipe -fstack-clash-protection -fcf-protection" \
-    -DCMAKE_EXE_LINKER_FLAGS_INIT="-Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack -Wl,--strip-all" \
-    -DCMAKE_MODULE_LINKER_FLAGS_INIT="-Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack -Wl,--strip-all" \
-    -DCMAKE_SHARED_LINKER_FLAGS_INIT="-Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack -Wl,--strip-all" \
-    $(cat ../onnxruntime_options-v1.17.0.txt) \
+    $(cat ../onnxruntime_options-v1.15.1.txt) \
     ../cmake
   cmake --build . -j $NUM_THREADS
   cmake --build . --target install
@@ -94,3 +89,5 @@ fi
 
 
 cmakeBuild "Release"
+
+

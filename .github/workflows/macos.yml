@@ -13,11 +13,10 @@ jobs:
       fail-fast: false
       matrix:
         ver:
-          - { onnx: v1.17.1, gradle: 8.5 }
+          - { onnx: v1.15.1, gradle: 8.0.1 }
         list:
           - { os_ver: 11 }
           - { os_ver: 12 }
-          - { os_ver: 13 }
 
     runs-on: macos-${{ matrix.list.os_ver }}
 
